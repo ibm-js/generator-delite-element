@@ -1,0 +1,7 @@
+{
+	"name": "<%= _.slugify(elementName) %>",
+	"version": "0.0.1",
+	"dependencies": {
+		"delite": "1.0.0"
+	}
+}
