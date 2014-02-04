@@ -26,15 +26,15 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 
 	var prompts = [
 		{
-			name: "elementName",
-			message: "What do you want to call your delite widget element?"
+			name: "widgetName",
+			message: "What do you want to call your delite widget?"
 		}
 	];
 
-	// TODO: include dpointer?, ...
+	// TODO: include dpointer?, which themes?, Invalidating? ...
 
 	this.prompt(prompts, function (props) {
-		this.elementName = props.elementName;
+		this.widgetName = props.widgetName;
 
 		cb();
 	}.bind(this));
@@ -43,9 +43,9 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 DeliteElementGenerator.prototype.app = function app() {
 	this.mkdir("tests");
 	this.mkdir("docs");
-	this.mkdir(this.elementName);
+	this.mkdir(this.widgetName);
 	// this.template("Gruntfile.js", "Gruntfile.js");
-	this.template("Element.js", this.elementName + ".js");
+	this.template("Element.js", this.widgetName + ".js");
 
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");

@@ -1,5 +1,5 @@
 {
-	"name": "<%= _.slugify(elementName) %>",
+	"name": "<%= _.slugify(widgetName) %>",
 	"version": "0.0.1",
 	"dependencies": {
 		"delite": "1.0.0"
