@@ -1,0 +1,32 @@
+define([
+	"dcl/dcl",
+	"delite/register",
+	"delite/Widget",
+	"delite/Invalidating",
+	"delite/themes/load!./<%= widgetName %>/{{theme}}/Button_css"
+], function (dcl, register, Widget, Invalidating) {
+
+	var <%= widgetName %> = dcl([Widget, Invalidating], {
+		baseClass: "<%= elementName %>",
+		value: "",
+
+		preCreate: function () {
+			this.addInvalidateProperties("value");
+		},
+
+		buildRendering: function () {
+			// build static part of the display
+			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
+		},
+
+		refreshRenderering: function (props) {
+			// if the value change update the display
+			if (props.value) {
+				this._h.innerHTML = this.value;
+			}
+		}
+	}
+	});
+
+	return register("<%= elementName %>", [HTMLElement, <%= widgetName %>]);
+});

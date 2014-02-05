@@ -25,12 +25,25 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 	// have Yeoman greet the user.
 	console.log(this.yeoman);
 
-	// TODO: include dpointer?, which themes?, Invalidating? optional tag prefid (d-) ...
+	// TODO: include dpointer?, which themes?, extend a deliteful widget? i18n
 
 	this.prompt([
 		{
+			// TODO: get default name from directory name?
 			name: "elementName",
 			message: "What do you want to call your delite widget element?"
+		},
+		{
+			type: "confirm",
+			name: "templated",
+			message: "Would you like your delite element to be built on a template?",
+			default: true
+		},
+		{
+			type: "confirm",
+			name: "dpointer",
+			message: "Will you delite element require pointer management?",
+			default: false
 		}
 	], function (props) {
 		this.elementName = _.slugify(props.elementName);
@@ -44,22 +57,29 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		}
 		this.projectName = this.widgetName;
 		this.widgetName = _.classify(this.widgetName);
+		this.templated = props.templated;
+		this.pointer = props.pointer;
 		cb();
 	}.bind(this));
 };
 
-DeliteElementGenerator.prototype.app = function app() {
+DeliteElementGenerator.prototype.generateElement = function app() {
 	this.mkdir("tests");
 	this.mkdir("docs");
-	this.mkdir(this.widgetName);
-	// this.template("Gruntfile.js", "Gruntfile.js");
-	this.template("Element.js", this.widgetName + ".js");
+	this.mkdir(this.widgetName + "/themes/boostrap");
 
+	this.copy("Element.html", this.widgetName + "/" + this.widgetName + ".html");
+	// this.template("Gruntfile.js", "Gruntfile.js");
+	if (this.template) {
+		this.template("_Element.js.templated", this.widgetName + ".js");
+	} else {
+		this.template("_Element.js.harcoded", this.widgetName + ".js");
+	}
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
-
-	this.template("./Element/Element.css", "./" + this.widgetName + "/themes/boostrap/" + this.widgetName + ".css");
-
+	this.template("_Element.css", this.widgetName + "/themes/boostrap/" + this.widgetName + ".css");
+	//this.template("_Test.js", "tests/" + this.widgetName + ".js");
+	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
 };
 
 DeliteElementGenerator.prototype.projectfiles = function projectfiles() {

@@ -1,0 +1,9 @@
+/* style for the custom element itself */
+.<%= elementName %> {
+
+}
+
+/* style for some inner elements */
+.<%= elementName %> h1 {
+
+}

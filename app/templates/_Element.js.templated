@@ -1,0 +1,17 @@
+define([
+	"dcl/dcl",
+	"delite/register",
+	"delite/Widget",
+	"delite/handlebars",
+	"dojo/text!./<%= widgetName %>/<%= widgetName %>.html",
+	"delite/themes/load!./<%= widgetName %>/{{theme}}/<%= widgetName %>_css"
+], function (dcl, register, Widget, handlebars, template) {
+
+	var <%= widgetName %> = dcl([Widget], {
+		baseClass: "<%= elementName %>",
+		value: "",
+		buildRendering: handlebars.compile(template)
+	});
+
+	return register("<%= elementName %>", [HTMLElement, <%= widgetName %>]);
+});

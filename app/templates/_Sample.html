@@ -1,0 +1,16 @@
+<html>
+	<head>
+		<script src="../bower_components/requirejs/require.js"></script>
+		<script>
+			require.config({
+				baseUrl: "../bower_components"
+			});
+			require(["../<%= widgetName %>", "delite/register"], function (register) {
+				register.parse();
+			});
+		</script>
+	</head>
+	<body>
+		<<%= elementName %> value="The Title"></<%= elementName %>>
+	</body>
+</html>

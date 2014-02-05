@@ -2,6 +2,7 @@
 	"name": "<%= projectName %>",
 	"version": "0.0.1",
 	"dependencies": {
-		"delite": "1.0.0"
+		"delite": "0.1.0-dev",
+		"requirejs": "2.1.x"
 	}
 }
