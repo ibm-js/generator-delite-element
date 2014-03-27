@@ -3,14 +3,18 @@
 		<script src="../bower_components/requirejs/require.js"></script>
 		<script>
 			require.config({
-				baseUrl: "../bower_components"
+				baseUrl: "../bower_components",
+				paths: {
+					<%= package %>: ".."
+				}
 			});
-			require(["../<%= widgetName %>", "delite/register"], function (register) {
+			require(["delite/register", "<%= package %>/<%= widgetName %>"], function (register) {
 				register.parse();
 			});
 		</script>
 	</head>
 	<body>
-		<<%= elementName %> value="The Title"></<%= elementName %>>
+		<<%= elementName %> id="element" value="The Title"></<%= elementName %>>
+		<button onclick="element.value='New Title'; event.target.enable=false">click to change title</button>
 	</body>
 </html>

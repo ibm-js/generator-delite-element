@@ -1,5 +1,5 @@
 {
-	"name": "<%= projectName %>",
+	"name": "<%= package %>",
 	"version": "0.0.1",
 	"dependencies": {
 		"delite": "0.1.0-dev",

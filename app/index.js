@@ -25,13 +25,18 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 	// have Yeoman greet the user.
 	console.log(this.yeoman);
 
-	// TODO: include dpointer?, which themes?, extend a deliteful widget? i18n
+	// TODO:  which themes?, extend a deliteful widget? i18n, Invaldidating, message when finished to launch sample
 
 	this.prompt([
 		{
-			// TODO: get default name from directory name?
+			name: "package",
+			message: "What is the name of your delite widget element package?",
+			default: this.appname
+		},
+		{
 			name: "elementName",
-			message: "What do you want to call your delite widget element?"
+			message: "What do you want to call your delite widget element?",
+			default: this.appname+"-element"
 		},
 		{
 			type: "confirm",
@@ -46,16 +51,15 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 			default: false
 		}
 	], function (props) {
+		this.package = props.package;
 		this.elementName = _.slugify(props.elementName);
 		this.widgetName = this.elementName;
-		this.projectName = this.elementName;
 		if (this.elementName.indexOf("-") === 1) {
 			// we have a single letter prefix like d-component-name
 			// we strip it for the widget name
 			// otherwise we keep it
 			this.widgetName = this.widgetName.substring(2);
 		}
-		this.projectName = this.widgetName;
 		this.widgetName = _.classify(this.widgetName);
 		this.templated = props.templated;
 		this.pointer = props.pointer;
@@ -64,9 +68,10 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 };
 
 DeliteElementGenerator.prototype.generateElement = function app() {
+	this.packge = "";
 	this.mkdir("tests");
 	this.mkdir("docs");
-	this.mkdir(this.widgetName + "/themes/boostrap");
+	this.mkdir(this.widgetName + "/themes/bootstrap");
 
 	this.copy("Element.html", this.widgetName + "/" + this.widgetName + ".html");
 	// this.template("Gruntfile.js", "Gruntfile.js");
@@ -77,7 +82,7 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	}
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
-	this.template("_Element.css", this.widgetName + "/themes/boostrap/" + this.widgetName + ".css");
+	this.template("_Element.css", this.widgetName + "/themes/bootstrap/" + this.widgetName + ".css");
 	//this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
 };

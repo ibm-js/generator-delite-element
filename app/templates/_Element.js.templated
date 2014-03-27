@@ -4,7 +4,7 @@ define([
 	"delite/Widget",
 	"delite/handlebars",
 	"dojo/text!./<%= widgetName %>/<%= widgetName %>.html",
-	"delite/themes/load!./<%= widgetName %>/{{theme}}/<%= widgetName %>_css"
+	"delite/themes/load!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"
 ], function (dcl, register, Widget, handlebars, template) {
 
 	var <%= widgetName %> = dcl([Widget], {
