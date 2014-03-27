@@ -3,9 +3,10 @@ define([
 	"delite/Widget",
 	"delite/handlebars",
 	"dojo/text!./<%= widgetName %>/<%= widgetName %>.html",<% if (i18n) {%>
-    "requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %>
+    "requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
+    "dpointer/events",<% } %>
     "delite/themes/load!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"
-], function (register, Widget, handlebars, template<% if (i18n) {%>,messages<% } %>) {
+], function (register, Widget, handlebars, template<% if (i18n) {%>,messages<% } %><% if (pointer) {%>,events<% } %>) {
 	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
 		<% if (i18n) { %>nls: messages,<% } %>

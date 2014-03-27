@@ -11,8 +11,13 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 	yeoman.generators.Base.apply(this, arguments);
 
 	this.on("end", function () {
-		this.installDependencies({ skipInstall: options["skip-install"] });
-		console.log("Once dependencies are installed point your browser to "+this.package+"/samples/"+this.widgetName+".html to run a simple sample showing your element");
+		var self = this;
+		this.installDependencies({ 
+			skipInstall: options["skip-install"],
+			callback: function () {
+				console.log("Dependencies have been installed, point your browser to "+self.package+"/samples/"+self.widgetName+".html to run a simple sample showing your element");
+			}
+		});
 	});
 
 	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, "../package.json")));
@@ -53,7 +58,7 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		},
 		{
 			type: "confirm",
-			name: "dpointer",
+			name: "pointer",
 			message: "Will your delite element require pointer management?",
 			default: false
 		}

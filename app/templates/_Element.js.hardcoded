@@ -2,15 +2,16 @@ define([
 	"delite/register",
 	"delite/Widget",
 	"delite/Invalidating",<% if (i18n) {%>
-	"requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %>
+	"requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
+    "dpointer/events",<% } %>
 	"delite/themes/load!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"
-], function (register, Widget, Invalidating<% if (i18n) {%>,messages<% } %>) {
+], function (register, Widget, Invalidating<% if (i18n) {%>,messages<% } %><% if (pointer) {%>,events<% } %>) {
 	return register("<%= elementName %>", [HTMLElement, Widget, Invalidating], {
 		baseClass: "<%= elementName %>",
 		value: "",
 
 		preCreate: function () {
-			this.addInvalidateProperties("value");
+			this.addInvalidatingProperties("value");
 		},
 
 		buildRendering: function () {
@@ -21,12 +22,11 @@ define([
 			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
 		},
 
-		refreshRenderering: function (props) {
+		refreshRendering: function (props) {
 			// if the value change update the display
 			if (props.value) {
 				this._h.innerHTML = this.value;
 			}
 		}
-	}
 	});
 });
