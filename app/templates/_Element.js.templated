@@ -1,17 +1,15 @@
 define([
-	"dcl/dcl",
 	"delite/register",
 	"delite/Widget",
 	"delite/handlebars",
-	"dojo/text!./<%= widgetName %>/<%= widgetName %>.html",
-	"delite/themes/load!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"
-], function (dcl, register, Widget, handlebars, template) {
-
-	var <%= widgetName %> = dcl([Widget], {
+	"dojo/text!./<%= widgetName %>/<%= widgetName %>.html",<% if (i18n) {%>
+    "requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %>
+    "delite/themes/load!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"
+], function (register, Widget, handlebars, template<% if (i18n) {%>,messages<% } %>) {
+	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
+		<% if (i18n) { %>nls: messages,<% } %>
 		value: "",
 		buildRendering: handlebars.compile(template)
 	});
-
-	return register("<%= elementName %>", [HTMLElement, <%= widgetName %>]);
 });

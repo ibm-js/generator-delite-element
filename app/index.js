@@ -12,6 +12,7 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 
 	this.on("end", function () {
 		this.installDependencies({ skipInstall: options["skip-install"] });
+		console.log("Once dependencies are installed point your browser to "+this.package+"/samples/"+this.widgetName+".html to run a simple sample showing your element");
 	});
 
 	this.pkg = JSON.parse(this.readFileAsString(path.join(__dirname, "../package.json")));
@@ -25,7 +26,7 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 	// have Yeoman greet the user.
 	console.log(this.yeoman);
 
-	// TODO:  which themes?, extend a deliteful widget? i18n, Invaldidating, message when finished to launch sample
+	// TODO:  which themes?, extend a deliteful widget?  Grunt
 
 	this.prompt([
 		{
@@ -46,8 +47,14 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		},
 		{
 			type: "confirm",
+			name: "i18n",
+			message: "Will your delite element require string internationalization?",
+			default: true
+		},
+		{
+			type: "confirm",
 			name: "dpointer",
-			message: "Will you delite element require pointer management?",
+			message: "Will your delite element require pointer management?",
 			default: false
 		}
 	], function (props) {
@@ -62,6 +69,7 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		}
 		this.widgetName = _.classify(this.widgetName);
 		this.templated = props.templated;
+		this.i18n = props.i18n;
 		this.pointer = props.pointer;
 		cb();
 	}.bind(this));
@@ -73,18 +81,25 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	this.mkdir("docs");
 	this.mkdir(this.widgetName + "/themes/bootstrap");
 
-	this.copy("Element.html", this.widgetName + "/" + this.widgetName + ".html");
 	// this.template("Gruntfile.js", "Gruntfile.js");
-	if (this.template) {
+	if (this.templated) {
+		this.template("_Element.html", this.widgetName + "/" + this.widgetName + ".html");
 		this.template("_Element.js.templated", this.widgetName + ".js");
 	} else {
-		this.template("_Element.js.harcoded", this.widgetName + ".js");
+		this.template("_Element.js.hardcoded", this.widgetName + ".js");
 	}
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
 	this.template("_Element.css", this.widgetName + "/themes/bootstrap/" + this.widgetName + ".css");
 	//this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
+	if (this.i18n) {
+//		this.mkdir(this.widgetName + "/nls/en");
+		this.mkdir(this.widgetName + "/nls/fr");
+		this.copy("messages.js", this.widgetName + "/nls/messages.js");
+		this.copy("messages.fr.js", this.widgetName + "/nls/fr/messages.js");
+
+	}
 };
 
 DeliteElementGenerator.prototype.projectfiles = function projectfiles() {

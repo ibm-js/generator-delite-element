@@ -3,6 +3,8 @@
 	"version": "0.0.1",
 	"dependencies": {
 		"delite": "0.1.0-dev",
-		"requirejs": "2.1.x"
+		"requirejs": "2.1.x"<% if (i18n) { %>,
+		"requirejs-dplugins": "0.1.0-dev"
+		<% } %>
 	}
 }

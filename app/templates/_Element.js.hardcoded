@@ -1,12 +1,11 @@
 define([
-	"dcl/dcl",
 	"delite/register",
 	"delite/Widget",
-	"delite/Invalidating",
-	"delite/themes/load!./<%= widgetName %>/themes/{{theme}}/Button.css"
-], function (dcl, register, Widget, Invalidating) {
-
-	var <%= widgetName %> = dcl([Widget, Invalidating], {
+	"delite/Invalidating",<% if (i18n) {%>
+	"requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %>
+	"delite/themes/load!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"
+], function (register, Widget, Invalidating<% if (i18n) {%>,messages<% } %>) {
+	return register("<%= elementName %>", [HTMLElement, Widget, Invalidating], {
 		baseClass: "<%= elementName %>",
 		value: "",
 
@@ -16,6 +15,9 @@ define([
 
 		buildRendering: function () {
 			// build static part of the display
+			var title = this.ownerDocument.createElement("span");
+			title.innerText = messages.title;
+			this.appendChild(title);
 			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
 		},
 
@@ -27,6 +29,4 @@ define([
 		}
 	}
 	});
-
-	return register("<%= elementName %>", [HTMLElement, <%= widgetName %>]);
 });
