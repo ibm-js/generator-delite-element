@@ -41,8 +41,15 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		},
 		{
 			name: "elementName",
-			message: "What do you want to call your delite widget element?",
-			default: this.appname+"-element"
+			message: "What do you want to call your delite widget element (must contain a dash)?",
+			default: this.appname+"-element",
+			validate: function (value) { 
+				if (value.indexOf("-") !== -1) {
+					return true;
+				} else {
+					return "element name must contain a dash (-)"
+				}
+			}
 		},
 		{
 			type: "confirm",
