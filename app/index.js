@@ -12,10 +12,12 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 
 	this.on("end", function () {
 		var self = this;
-		this.installDependencies({ 
+		this.installDependencies({
 			skipInstall: options["skip-install"],
 			callback: function () {
-				console.log("Dependencies have been installed, point your browser to "+self.package+"/samples/"+self.widgetName+".html to run a simple sample showing your element");
+				console.log("Dependencies have been installed, point your browser to " +
+					self.package + "/samples/" + self.widgetName +
+					".html to run a simple sample showing your element");
 			}
 		});
 	});
@@ -42,12 +44,12 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		{
 			name: "elementName",
 			message: "What do you want to call your delite widget element (must contain a dash)?",
-			default: this.appname+"-element",
+			default: this.appname + "-element",
 			validate: function (value) { 
 				if (value.indexOf("-") !== -1) {
 					return true;
 				} else {
-					return "element name must contain a dash (-)"
+					return "element name must contain a dash (-)";
 				}
 			}
 		},
@@ -56,6 +58,12 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 			name: "templated",
 			message: "Would you like your delite element to be built on a template?",
 			default: true
+		},
+		{
+			type: "confirm",
+			name: "theming",
+			message: "Would you like your delite element to providing theming capabilities?",
+			default: false
 		},
 		{
 			type: "confirm",
@@ -81,6 +89,7 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		}
 		this.widgetName = _.classify(this.widgetName);
 		this.templated = props.templated;
+		this.theming = props.theming;
 		this.i18n = props.i18n;
 		this.pointer = props.pointer;
 		cb();
@@ -91,7 +100,6 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	this.packge = "";
 	this.mkdir("tests");
 	this.mkdir("docs");
-	this.mkdir(this.widgetName + "/themes/bootstrap");
 
 	// this.template("Gruntfile.js", "Gruntfile.js");
 	if (this.templated) {
@@ -102,7 +110,11 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	}
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
-	this.template("_Element.css", this.widgetName + "/themes/bootstrap/" + this.widgetName + ".css");
+	if (this.theming) {
+		this.template("_Element.css", this.widgetName + "/themes/bootstrap/" + this.widgetName + ".css");
+	} else {
+		this.template("_Element.css", this.widgetName + "/css/" + this.widgetName + ".css");
+	}
 	//this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
 	if (this.i18n) {
