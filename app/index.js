@@ -39,13 +39,13 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 		{
 			name: "package",
 			message: "What is the name of your delite widget element package?",
-			default: this.appname
+			default: this.appname.indexOf(" ") !== -1 ? _.slugify(this.appname) : this.appname
 		},
 		{
 			name: "elementName",
 			message: "What do you want to call your delite widget element (must contain a dash)?",
-			default: this.appname + "-element",
-			validate: function (value) { 
+			default: (this.appname.indexOf(" ") !== -1 ? _.slugify(this.appname) : this.appname) + "-element",
+			validate: function (value) {
 				if (value.indexOf("-") !== -1) {
 					return true;
 				} else {
