@@ -1,3 +1,4 @@
+/*global module, __dirname*/
 /*jshint globalstrict: false*/
 "use strict";
 /*jshint globalstrict: true*/
@@ -7,7 +8,7 @@ var yeoman = require("yeoman-generator");
 var _ = require("underscore.string");
 
 
-var DeliteElementGenerator = module.exports = function DeliteElementGenerator(args, options, config) {
+var DeliteElementGenerator = module.exports = function DeliteElementGenerator(args, options) {
 	yeoman.generators.Base.apply(this, arguments);
 
 	this.on("end", function () {
@@ -15,8 +16,8 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 		this.installDependencies({
 			skipInstall: options["skip-install"],
 			callback: function () {
-				console.log("Dependencies have been installed, point your browser to " +
-					self.package + "/samples/" + self.widgetName +
+				self.log("Dependencies have been installed, point your browser to " +
+					self.appname + "/samples/" + self.widgetName +
 					".html to run a simple sample showing your element");
 			}
 		});
@@ -27,11 +28,11 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 
 util.inherits(DeliteElementGenerator, yeoman.generators.Base);
 
-DeliteElementGenerator.prototype.askFor = function askFor() {
+DeliteElementGenerator.prototype.askForMain = function askFor() {
 	var cb = this.async();
 
 	// have Yeoman greet the user.
-	console.log(this.yeoman);
+	this.log(this.yeoman);
 
 	// TODO:  which themes?, extend a deliteful widget?  Grunt
 
@@ -40,11 +41,21 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 			name: "package",
 			message: "What is the name of your delite widget element package?",
 			default: this.appname.indexOf(" ") !== -1 ? _.slugify(this.appname) : this.appname
-		},
+		}
+	], function (props) {
+		this.package = props.package;
+		cb();
+	}.bind(this));
+};
+	
+DeliteElementGenerator.prototype.askMore = function askMore() {
+	var cb = this.async();
+
+	this.prompt([
 		{
 			name: "elementName",
 			message: "What do you want to call your delite widget element (must contain a dash)?",
-			default: (this.appname.indexOf(" ") !== -1 ? _.slugify(this.appname) : this.appname) + "-element",
+			default: (this.package.indexOf(" ") !== -1 ? _.slugify(this.package) : this.package) + "-element",
 			validate: function (value) {
 				if (value.indexOf("-") !== -1) {
 					return true;
@@ -78,7 +89,6 @@ DeliteElementGenerator.prototype.askFor = function askFor() {
 			default: false
 		}
 	], function (props) {
-		this.package = props.package;
 		this.elementName = _.slugify(props.elementName);
 		this.widgetName = this.elementName;
 		if (this.elementName.indexOf("-") === 1) {
