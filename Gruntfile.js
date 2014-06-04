@@ -5,7 +5,8 @@ module.exports = function (grunt) {
 	grunt.initConfig({
 		jshint: {
 			src: [
-				"**/*.js"
+				"*.js",
+				"tests/*.js"
 			],
 			options: {
 				jshintrc: ".jshintrc"
@@ -15,8 +16,7 @@ module.exports = function (grunt) {
 			all: {
 				options: {
 					config: "tests/intern",
-					reporters: []/*
-					reporters: ["runner"]*/
+					reporters: []
 				}
 			}
 		}
@@ -39,7 +39,7 @@ module.exports = function (grunt) {
 		"grunt test:console\n" +
 		"grunt test:lcovhtml\n" +
 		"grunt test:console:lcovhtml";
-	grunt.registerTask("test", testTaskDescription, function (target) {
+	grunt.registerTask("test", testTaskDescription, function () {
 		function addReporter(reporter) {
 			var property = "intern.all.options.reporters",
 				value = grunt.config.get(property);
