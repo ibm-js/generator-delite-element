@@ -5,7 +5,7 @@
 	"devDependencies": {
 		"grunt": "~0.4.1",
 		"bower": "~0.9.2",
-		"intern": "1.4.x"
+		"intern": "1.7.x"
 	},
 	"engines": {
 		"node": ">=0.8.0"

@@ -18,7 +18,8 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 			callback: function () {
 				self.log("Dependencies have been installed, point your browser to " +
 					self.appname + "/samples/" + self.widgetName +
-					".html to run a simple sample showing your element");
+					".html to run a simple sample showing your element, or run selenium and type grunt test:local to " +
+					"launch unit testing");
 			}
 		});
 	});
@@ -34,7 +35,7 @@ DeliteElementGenerator.prototype.askForMain = function askFor() {
 	// have Yeoman greet the user.
 	this.log(this.yeoman);
 
-	// TODO:  which themes?, extend a deliteful widget?  Grunt
+	// TODO:  which themes?, extend a deliteful widget?  docs skeleton
 
 	this.prompt([
 		{
@@ -108,10 +109,7 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 
 DeliteElementGenerator.prototype.generateElement = function app() {
 	this.packge = "";
-	this.mkdir("tests");
-	this.mkdir("docs");
-
-	// this.template("Gruntfile.js", "Gruntfile.js");
+	// this.mkdir("docs");
 	if (this.templated) {
 		this.template("_Element.html", this.widgetName + "/" + this.widgetName + ".html");
 		this.template("_Element.js.templated", this.widgetName + ".js");
@@ -125,10 +123,13 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	} else {
 		this.template("_Element.css", this.widgetName + "/css/" + this.widgetName + ".css");
 	}
-	//this.template("_Test.js", "tests/" + this.widgetName + ".js");
+	this.template("_Test.js", "tests/" + this.widgetName + ".js");
+	this.template("_intern.js", "tests/intern.js");
+	this.copy("intern.local.js", "tests/intern.local.js");
+	this.copy("intern.browser.js", "tests/intern.browser.js");
+	this.copy("Gruntfile.js");
 	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
 	if (this.i18n) {
-//		this.mkdir(this.widgetName + "/nls/en");
 		this.mkdir(this.widgetName + "/nls/fr");
 		this.copy("messages.js", this.widgetName + "/nls/messages.js");
 		this.copy("messages.fr.js", this.widgetName + "/nls/fr/messages.js");
