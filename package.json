@@ -19,6 +19,7 @@
 	"devDependencies": {
 		"grunt-contrib-jshint": "~0.6.0",
 		"intern": "1.7",
+		"requirejs": "2.1.x",
 		"grunt": "~0.4.2",
 		"rimraf": "2.2.x",
 		"mkdirp": "0.5.x"
