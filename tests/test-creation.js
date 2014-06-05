@@ -1,6 +1,7 @@
+/* global process */
 define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/dojo/node!yeoman-generator",
-		"intern/dojo/Deferred", "module", "intern/dojo/node!rimraf", "intern/dojo/node!mkdirp", "intern/dojo/node!fs"],
-	function (registerSuite, assert, path, yo, Deferred, module, rimraf, mkdirp, fs) {
+		"intern/dojo/Deferred", "module", "intern/dojo/node!rimraf", "intern/dojo/node!mkdirp"],
+	function (registerSuite, assert, path, yo, Deferred, module, rimraf, mkdirp) {
 		var helpers = yo.test;
 		var __filename = module.uri;
 		var __dirname = path.dirname(__filename);
@@ -28,7 +29,6 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 				if (err) {
 					d.reject(err);
 				}
-				fs.mkdir(dir);
 				mkdirp(dir, function (err) {
 					if (err) {
 						d.reject(err);
