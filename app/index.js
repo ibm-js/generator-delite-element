@@ -108,8 +108,6 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 };
 
 DeliteElementGenerator.prototype.generateElement = function app() {
-	this.packge = "";
-	// this.mkdir("docs");
 	if (this.templated) {
 		this.template("_Element.html", this.widgetName + "/" + this.widgetName + ".html");
 		this.template("_Element.js.templated", this.widgetName + ".js");
@@ -118,6 +116,7 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	}
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
+	this.template("_README.md", "README.md");
 	if (this.theming) {
 		this.template("_Element.css", this.widgetName + "/themes/bootstrap/" + this.widgetName + ".css");
 	} else {

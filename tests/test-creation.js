@@ -58,12 +58,18 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 					".jshintrc",
 					"bower.json",
 					"package.json",
+					"README.md",
+					"Gruntfile.js",
 					"TempElement.js",
 					"samples/TempElement.html",
 					"TempElement/css/TempElement.css",
 					"TempElement/nls/messages.js",
 					"TempElement/nls/fr/messages.js",
-					"TempElement/TempElement.html"
+					"TempElement/TempElement.html",
+					"tests/TempElement.js",
+					"tests/intern.js",
+					"tests/intern.local.js",
+					"tests/intern.browser.js"
 				], [], {
 					"pointer": true
 				});
@@ -74,11 +80,17 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 					".jshintrc",
 					"bower.json",
 					"package.json",
+					"README.md",
+					"Gruntfile.js",
 					"TempElement.js",
 					"samples/TempElement.html",
 					"TempElement/css/TempElement.css",
 					"TempElement/nls/messages.js",
-					"TempElement/nls/fr/messages.js"
+					"TempElement/nls/fr/messages.js",
+					"tests/TempElement.js",
+					"tests/intern.js",
+					"tests/intern.local.js",
+					"tests/intern.browser.js"
 				], [
 					"TempElement/TempElement.html"
 				], {
@@ -91,10 +103,16 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 					".jshintrc",
 					"bower.json",
 					"package.json",
+					"README.md",
+					"Gruntfile.js",
 					"TempElement.js",
 					"samples/TempElement.html",
 					"TempElement/css/TempElement.css",
-					"TempElement/TempElement.html"
+					"TempElement/TempElement.html",
+					"tests/TempElement.js",
+					"tests/intern.js",
+					"tests/intern.local.js",
+					"tests/intern.browser.js"
 				], [
 					"TempElement/nls/messages.js",
 					"TempElement/nls/fr/messages.js"

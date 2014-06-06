@@ -4,7 +4,7 @@
 
 ## Status
 
-Latest release is 0.1.2
+Latest release is 0.1.3
 
 ## Issues
 
