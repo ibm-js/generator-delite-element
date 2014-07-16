@@ -5,7 +5,7 @@
 			require.config({
 				baseUrl: "../bower_components",
 				paths: {
-					<%= package %>: ".."
+					"<%= package %>": ".."
 				}
 			});
 			require(["delite/register", "<%= package %>/<%= widgetName %>"], function (register) {

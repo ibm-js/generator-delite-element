@@ -1,7 +1,7 @@
 define([
 	"delite/register",
 	"delite/Widget",
-	"delite/Invalidating",<% if (i18n) {%>
+	"decor/Invalidating",<% if (i18n) {%>
 	"requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
     "dpointer/events",<% } %>
     <% if (theming) {%>"delite/theme!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"<% } else { %>"delite/css!./<%= widgetName %>/css/<%= widgetName %>.css"<% } %>
@@ -10,21 +10,17 @@ define([
 		baseClass: "<%= elementName %>",
 		value: "",
 
-		preCreate: function () {
-			this.addInvalidatingProperties("value");
-		},
-
 		buildRendering: function () {
 			// build static part of the display
 			var title = this.ownerDocument.createElement("span");
-			title.innerText = messages.title;
+			title.innerText = <% if (i18n) { %>messages.title+":"<% } else { %>"title:"<% } %>;
 			this.appendChild(title);
 			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
 		},
 
 		refreshRendering: function (props) {
 			// if the value change update the display
-			if (props.value) {
+			if ("value" in props) {
 				this._h.innerHTML = this.value;
 			}
 		}
