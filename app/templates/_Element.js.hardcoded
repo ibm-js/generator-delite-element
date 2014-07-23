@@ -1,19 +1,18 @@
 define([
 	"delite/register",
-	"delite/Widget",
-	"decor/Invalidating",<% if (i18n) {%>
+	"delite/Widget",<% if (i18n) {%>
 	"requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
     "dpointer/events",<% } %>
     <% if (theming) {%>"delite/theme!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"<% } else { %>"delite/css!./<%= widgetName %>/css/<%= widgetName %>.css"<% } %>
-], function (register, Widget, Invalidating<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %>) {
-	return register("<%= elementName %>", [HTMLElement, Widget, Invalidating], {
+], function (register, Widget<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %>) {
+	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
 		value: "",
 
 		buildRendering: function () {
 			// build static part of the display
 			var title = this.ownerDocument.createElement("span");
-			title.innerText = <% if (i18n) { %>messages.title+":"<% } else { %>"title:"<% } %>;
+			title.innerText = <% if (i18n) { %>messages.title + ":"<% } else { %>"title:"<% } %>;
 			this.appendChild(title);
 			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
 		},
