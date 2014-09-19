@@ -3,7 +3,7 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 		"intern/dojo/Deferred", "module", "intern/dojo/node!fs", "intern/dojo/node!rimraf", "intern/dojo/node!mkdirp"],
 	function (registerSuite, assert, path, yo, Deferred, module, fs, rimraf, mkdirp) {
 		function copyObj(obj) {
-			var copy = {}
+			var copy = {};
 			for (var key in obj) {
 				copy[key] = obj[key];
 			}
