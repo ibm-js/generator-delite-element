@@ -88,6 +88,12 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			name: "pointer",
 			message: "Will your delite element require pointer management?",
 			default: false
+		},
+		{
+			type: "confirm",
+			name: "build",
+			message: "Do you want to use build version of delite package (instead of source version)?",
+			default: true
 		}
 	], function (props) {
 		this.elementName = _.slugify(props.elementName);
@@ -99,6 +105,7 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			this.widgetName = this.widgetName.substring(2);
 		}
 		this.widgetName = _.classify(this.widgetName);
+		this.build = props.build;
 		this.templated = props.templated;
 		this.theming = props.theming;
 		this.i18n = props.i18n;

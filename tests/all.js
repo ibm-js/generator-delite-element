@@ -1,4 +1,5 @@
 define([
 	"./test-load",
-	"./test-creation"
+	"./test-creation",
+	"./test-bower"
 ]);
