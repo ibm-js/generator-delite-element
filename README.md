@@ -1,10 +1,10 @@
 # generator-delite-element [![Build Status](https://travis-ci.org/ibm-js/generator-delite-element.png?branch=master)](https://travis-ci.org/ibm-js/generator-delite-element)
 
-[Yeoman](http://yeoman.io) generator for [delite](https://github.com/ibm-js/delite) elements.
+[Yeoman](http://yeoman.io) generator for [delite](http://ibm-js.github.io/delite/) elements.
 
 ## Status
 
-Latest release is 0.2.4
+Latest release is 0.3
 
 ## Issues
 

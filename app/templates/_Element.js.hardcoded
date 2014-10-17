@@ -9,10 +9,10 @@ define([
 		baseClass: "<%= elementName %>",
 		value: "",
 
-		buildRendering: function () {
+		render: function () {
 			// build static part of the display
 			var title = this.ownerDocument.createElement("span");
-			title.innerText = <% if (i18n) { %>messages.title + ":"<% } else { %>"title:"<% } %>;
+			title.innerText = <% if (i18n) { %>messages.title +":"<% } else { %>"title:"<% } %>;
 			this.appendChild(title);
 			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
 		},

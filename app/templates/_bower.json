@@ -2,9 +2,9 @@
 	"name": "<%= package %>",
 	"version": "0.0.1",
 	"dependencies": {
-		"delite<% if (build) { %>-build<% } %>": "0.3.x",
+		"delite<% if (build) { %>-build<% } %>": "0.4.x",
 		"requirejs": "2.1.x"<% if (!build) { %><% if (i18n) { %>,
-		"requirejs-dplugins": "0.2.x-dev"<% } %><% if (templated) { %>,
+		"requirejs-dplugins": "0.3.x"<% } %><% if (templated) { %>,
 		"requirejs-text": "2.0.x"<% } %><% } %><% if (pointer) { %>,
 		"dpointer<% if (build) { %>-build<% } %>": "0.3.x"<% } %>
 	}

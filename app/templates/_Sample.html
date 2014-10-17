@@ -9,7 +9,7 @@
 				}
 			});
 			<% if (build) { %>
-			require(["delite-build/boot"], function() {
+			require(["delite-build/layer"], function() {
 			<% } %>
 				require(["delite/register", "<%= package %>/<%= widgetName %>"], function (register) {
 					register.parse();
