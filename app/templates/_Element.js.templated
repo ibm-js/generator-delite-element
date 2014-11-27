@@ -4,7 +4,7 @@ define([
 	"delite/handlebars!./<%= widgetName %>/<%= widgetName %>.html",<% if (i18n) {%>
     "requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
     "dpointer/events",<% } %>
-    <% if (theming) {%>"delite/theme!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"<% } else { %>"delite/css!./<%= widgetName %>/css/<%= widgetName %>.css"<% } %>
+    <% if (theming) {%>"delite/theme!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"<% } else { %>"requirejs-dplugins/css!./<%= widgetName %>/css/<%= widgetName %>.css"<% } %>
 ], function (register, Widget, template<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %>) {
 	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
