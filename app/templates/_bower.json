@@ -2,10 +2,10 @@
 	"name": "<%= package %>",
 	"version": "0.0.1",
 	"dependencies": {
-		"delite<% if (build) { %>-build<% } %>": "0.5.x",
+		"delite<% if (build) { %>-build<% } %>": "0.6.x",
 		"requirejs": "2.1.x"<% if (!build) { %><% if (i18n || !theming) { %>,
-		"requirejs-dplugins": "0.4.x"<% } %><% if (templated) { %>,
+		"requirejs-dplugins": "0.5.x"<% } %><% if (templated) { %>,
 		"requirejs-text": "2.0.x"<% } %><% } %><% if (pointer) { %>,
-		"dpointer<% if (build) { %>-build<% } %>": "0.4.x"<% } %>
+		"dpointer<% if (build) { %>-build<% } %>": "0.5.x"<% } %>
 	}
 }	
