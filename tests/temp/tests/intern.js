@@ -24,31 +24,23 @@ define({
 	},
 
 	loader: {
-		baseUrl: typeof window !== "undefined" ? "../../.." : "..",
+		baseUrl: "..",
 		paths: {
-			"dcl" : "<%= package %>/bower_components/dcl",
-			"dojo": "<%= package %>/bower_components/dojo",<% if (!build) {%>
-			"decor": "<%= package %>/bower_components/decor",
-			"dpointer": "<%= package %>/bower_components/dpointer",
-			"ecma402": "<%= package %>/bower_components/ecma402",
-			"delite": "<%= package %>/bower_components/delite",
-			"requirejs-dplugins": "<%= package %>/bower_components/requirejs-dplugins",
-			"requirejs-text": "<%= package %>/bower_components/requirejs-text"<% } else { %>
-			"decor-build": "<%= package %>/bower_components/decor-build",
-			"dpointer-build": "<%= package %>/bower_components/dpointer-build",
-			"ecma402-build": "<%= package %>/bower_components/ecma402-build",
-			"delite": "<%= package %>/bower_components/delite-build",
-			"delite-build": "<%= package %>/bower_components/delite-build"<% } %>
+			"dcl" : "temp/bower_components/dcl",
+			"dojo": "temp/bower_components/dojo",
+			"delite": "temp/bower_components/delite",
+			"requirejs-dplugins": "temp/bower_components/requirejs-dplugins",
+			"requirejs-text": "temp/bower_components/requirejs-text"
 		}
 	},
 
 	useLoader: {
 		"host-node": "requirejs",
-		"host-browser": "../../../<%= package %>/bower_components/requirejs/require.js"
+		"host-browser": "../../../temp/bower_components/requirejs/require.js"
 	},
 
 	// Non-functional test suite(s) to run in each browser
-	suites: [ "<%= package %>/tests/<%= widgetName %>" ],
+	suites: [ "temp/tests/TempElement" ],
 
 	// A regular expression matching URLs to files that should not be included in code coverage analysis
 	excludeInstrumentation: /^(?:tests|dcl|requirejs.*|dpointer)\//

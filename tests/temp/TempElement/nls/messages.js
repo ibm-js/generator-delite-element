@@ -1,6 +1,6 @@
 define({
 	root: {
-		title: "The Title Is:"
+		title: "title"
 	},
 	fr: true
 });

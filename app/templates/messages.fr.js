@@ -1,3 +1,3 @@
 define({
-	title: "titre"
+	title: "Le titre est :"
 });

@@ -2,19 +2,22 @@ define([
 	"delite/register",
 	"delite/Widget",<% if (i18n) {%>
 	"requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
-    "dpointer/events",<% } %>
+    "dpointer/events",<% } %><% if (ecma402) {%>
+    "ecma402/IntlShim",<% } %>
     <% if (theming) {%>"delite/theme!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"<% } else { %>"requirejs-dplugins/css!./<%= widgetName %>/css/<%= widgetName %>.css"<% } %>
-], function (register, Widget<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %>) {
+], function (register, Widget<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %><% if (ecma402) {%>, Intl<% } %>) {
 	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
-		value: "",
+		value: "",<% if (ecma402) {%>
+        formatter: new Intl.NumberFormat(),
+        <% } %>
 
 		render: function () {
 			// build static part of the display
-			var title = this.ownerDocument.createElement("span");
-			title.innerText = <% if (i18n) { %>messages.title +":"<% } else { %>"title:"<% } %>;
+			var title = this.ownerDocument.createElement("h1");
+			title.innerText = <% if (i18n) { %>messages.title<% } else { %>"title:"<% } %>;
 			this.appendChild(title);
-			this.appendChild(this._h = this.ownerDocument.createElement("h1"));
+			this.appendChild(this._h = this.ownerDocument.createElement("h2"));
 		},
 
 		refreshRendering: function (props) {

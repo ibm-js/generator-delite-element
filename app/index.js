@@ -80,8 +80,14 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 		{
 			type: "confirm",
 			name: "i18n",
-			message: "Will your delite element require string internationalization?",
+			message: "Will your delite element require string translations?",
 			default: true
+		},
+		{
+			type: "confirm",
+			name: "ecma402",
+			message: "Will your delite element require number, currency... internationalized formatting?",
+			default: false
 		},
 		{
 			type: "confirm",
@@ -109,6 +115,7 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 		this.templated = props.templated;
 		this.theming = props.theming;
 		this.i18n = props.i18n;
+		this.ecma402 = props.ecma402;
 		this.pointer = props.pointer;
 		cb();
 	}.bind(this));
@@ -132,7 +139,6 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_intern.js", "tests/intern.js");
 	this.copy("intern.local.js", "tests/intern.local.js");
-	this.copy("intern.browser.js", "tests/intern.browser.js");
 	this.copy("Gruntfile.js");
 	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
 	if (this.i18n) {

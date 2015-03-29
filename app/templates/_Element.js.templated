@@ -3,13 +3,16 @@ define([
 	"delite/Widget",
 	"delite/handlebars!./<%= widgetName %>/<%= widgetName %>.html",<% if (i18n) {%>
     "requirejs-dplugins/i18n!./<%= widgetName %>/nls/messages",<% } %><% if (pointer) {%>
-    "dpointer/events",<% } %>
+    "dpointer/events",<% } %><% if (ecma402) {%>
+    "ecma402/IntlShim",<% } %>
     <% if (theming) {%>"delite/theme!./<%= widgetName %>/themes/{{theme}}/<%= widgetName %>.css"<% } else { %>"requirejs-dplugins/css!./<%= widgetName %>/css/<%= widgetName %>.css"<% } %>
-], function (register, Widget, template<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %>) {
+], function (register, Widget, template<% if (i18n) {%>, messages<% } %><% if (pointer) {%>,events<% } %><% if (ecma402) {%>, Intl<% } %>) {
 	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
 		<% if (i18n) { %>nls: messages,<% } %>
-		value: "",
+		value: "",<% if (ecma402) {%>
+		formatter: new Intl.NumberFormat(),
+		<% } %>
 		template: template
 	});
 });

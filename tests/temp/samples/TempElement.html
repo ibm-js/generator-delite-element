@@ -5,22 +5,22 @@
 			require.config({
 				baseUrl: "../bower_components",
 				paths: {
-					"<%= package %>": ".."
+					"temp": ".."
 				}
 			});
-			<% if (build) { %>
-			require(["delite-build/layer", "ecma402-build/layer"], function () {
-			<% } %>
-				require(["delite/register", "<%= package %>/<%= widgetName %>"], function (register) {
+			
+			require(["delite-build/layer", "ecma402-build/layer"], function() {
+			
+				require(["delite/register", "temp/TempElement"], function (register) {
 					register.parse();
 				});
-			<% if (build) { %>
+			
 			});
-			<% } %>
+			
 		</script>
 	</head>
 	<body>
-		<<%= elementName %> id="element" value="The Title"></<%= elementName %>>
+		<temp-element id="element" value="The Title"></temp-element>
 		<button onclick="element.value='New Title'; event.target.disabled=true">click to change title</button>
 	</body>
 </html>
