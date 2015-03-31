@@ -9,8 +9,7 @@ define([
 	return register("<%= elementName %>", [HTMLElement, Widget], {
 		baseClass: "<%= elementName %>",
 		value: "",<% if (ecma402) {%>
-        formatter: new Intl.NumberFormat(),
-        <% } %>
+        formatter: new Intl.NumberFormat(navigator.language),<% } %>
 
 		render: function () {
 			// build static part of the display

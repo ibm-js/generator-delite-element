@@ -19,11 +19,18 @@ module.exports = function (grunt) {
 					reporters: ["runner"]
 				}
 			}
-		}
+		}<% if (watch) {%>,
+		watch: {
+			files: ["*.js", "samples/**", "tests/**", "<%= widgetName %>.js", "<%= widgetName %>/**"],
+			options: {
+				livereload: true
+			}
+		}<% } %>
 	});
 
 	// Load plugins
 	grunt.loadNpmTasks("intern");
+	grunt.loadNpmTasks("grunt-contrib-watch");
 
 	// Testing.
 	// always specify the target e.g. grunt test:remote, grunt test:remote

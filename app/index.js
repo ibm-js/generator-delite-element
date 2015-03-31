@@ -100,6 +100,12 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			name: "build",
 			message: "Do you want to use build version of delite package (instead of source version)?",
 			default: true
+		},
+		{
+			type: "confirm",
+			name: "watch",
+			message: "Do you want the Grunt file to include watch & livereload?",
+			default: true
 		}
 	], function (props) {
 		this.elementName = _.slugify(props.elementName);
@@ -117,6 +123,7 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 		this.i18n = props.i18n;
 		this.ecma402 = props.ecma402;
 		this.pointer = props.pointer;
+		this.watch = props.watch;
 		cb();
 	}.bind(this));
 };
@@ -139,7 +146,7 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_intern.js", "tests/intern.js");
 	this.copy("intern.local.js", "tests/intern.local.js");
-	this.copy("Gruntfile.js");
+	this.template("_Gruntfile.js", "Gruntfile.js");
 	this.template("_Sample.html", "samples/" + this.widgetName + ".html");
 	if (this.i18n) {
 		this.mkdir(this.widgetName + "/nls/fr");

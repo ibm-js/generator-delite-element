@@ -11,8 +11,7 @@ define([
 		baseClass: "<%= elementName %>",
 		<% if (i18n) { %>nls: messages,<% } %>
 		value: "",<% if (ecma402) {%>
-		formatter: new Intl.NumberFormat(),
-		<% } %>
+		formatter: new Intl.NumberFormat(navigator.language),<% } %>
 		template: template
 	});
 });

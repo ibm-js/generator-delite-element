@@ -22,5 +22,6 @@
 	<body>
 		<<%= elementName %> id="element" value="The Title"></<%= elementName %>>
 		<button onclick="element.value='New Title'; event.target.disabled=true">click to change title</button>
+		<% if (watch) { %><script src="//localhost:35729/livereload.js"></script><% } %>
 	</body>
 </html>
