@@ -68,8 +68,7 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 					"TempElement/TempElement.html",
 					"tests/TempElement.js",
 					"tests/intern.js",
-					"tests/intern.local.js",
-					"tests/intern.browser.js"
+					"tests/intern.local.js"
 				], [], {
 					"pointer": true
 				});
@@ -89,8 +88,7 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 					"TempElement/nls/fr/messages.js",
 					"tests/TempElement.js",
 					"tests/intern.js",
-					"tests/intern.local.js",
-					"tests/intern.browser.js"
+					"tests/intern.local.js"
 				], [
 					"TempElement/TempElement.html"
 				], {
@@ -111,8 +109,7 @@ define(["intern!object", "intern/chai!assert", "intern/dojo/node!path", "intern/
 					"TempElement/TempElement.html",
 					"tests/TempElement.js",
 					"tests/intern.js",
-					"tests/intern.local.js",
-					"tests/intern.browser.js"
+					"tests/intern.local.js"
 				], [
 					"TempElement/nls/messages.js",
 					"TempElement/nls/fr/messages.js"
