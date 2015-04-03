@@ -1,17 +1,16 @@
 define([
 	"intern!object",
 	"intern/chai!assert",
-	"intern/node_modules/dojo/Deferred",<% if (build) { %>
+	"intern/node_modules/dojo/Deferred"<% if (build) { %>,
 	"delite-build/layer",
-	"ecma402-build/layer",<% } %>
-	"requirejs-domready/domReady!"
+	"ecma402-build/layer"<% } %>
 ], function (registerSuite, assert, Deferred) {
 	var container, register;
 	registerSuite({
 		name: "",
 		setup: function () {
 			var dfd = new Deferred();
-			require(["delite/register", "<%= package %>/<%= widgetName %>"], function (r) {
+			require(["delite/register", "<%= package %>/<%= widgetName %>", "requirejs-domready/domReady!"], function (r) {
 				register = r;
 				dfd.resolve();
 			});
