@@ -5,10 +5,15 @@
 	"devDependencies": {
 		"grunt": "~0.4.1",
 		"intern": "1.7.x"<% if (watch) { %>,
-		"grunt-contrib-watch": "0.6.x"
+		"grunt-contrib-watch": "0.6.x"<%} %><% if (stylesheetFormat === "less") { %>,
+		"grunt-contrib-less": "^1.0.1"
 		<%} %>
 	},
 	"engines": {
 		"node": ">=0.8.0"
+	}<% if (stylesheetFormat === "less") { %>,
+	"scripts": {
+		"postinstall" : "grunt less:build"
 	}
+	<%} %>
 }

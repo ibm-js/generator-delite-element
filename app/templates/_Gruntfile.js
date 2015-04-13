@@ -21,9 +21,25 @@ module.exports = function (grunt) {
 			}
 		}<% if (watch) {%>,
 		watch: {
-			files: ["*.js", "samples/**", "tests/**", "<%= widgetName %>.js", "<%= widgetName %>/**"],
-			options: {
-				livereload: true
+			default: {
+				files: ["*.js", "samples/**", "tests/**", "<%= widgetName %>.js", "<%= widgetName %>/**"],
+						options: {
+					livereload: true
+				}
+			}<% if (stylesheetFormat === "less") {%>,
+			less: {
+				files: '<%= widgetName %>/less/*.less',
+						tasks: ['less'],
+						options: {
+					livereload: true
+				}
+		}<% } %>
+		}<% } %><% if (stylesheetFormat === "less") {%>,
+		less: {
+			build: {
+				files: {
+					"<%= widgetName %><% if (theming) {%>/themes/bootstrap/<% } else { %>/css/<% } %><%= widgetName %>.css": "<%= widgetName %>/less/<%= widgetName %>.less" // destination file and source file
+				}
 			}
 		}<% } %>
 	});
@@ -31,7 +47,9 @@ module.exports = function (grunt) {
 	// Load plugins
 	grunt.loadNpmTasks("intern");
 	grunt.loadNpmTasks("grunt-contrib-watch");
-
+	<% if (stylesheetFormat === "less") {%>
+	grunt.loadNpmTasks("grunt-contrib-less");
+	<% } %>
 	// Testing.
 	// always specify the target e.g. grunt test:remote, grunt test:remote
 	// then add on any other flags afterwards e.g. console, lcovhtml
