@@ -131,7 +131,7 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 		this.ecma402 = props.ecma402;
 		this.pointer = props.pointer;
 		this.watch = props.watch;
-		this.stylesheetFormat = props.stylesheetFormat;
+		this.stylesheetFormat = props.stylesheetFormat || 'css';
 		cb();
 	}.bind(this));
 };
