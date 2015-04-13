@@ -12,8 +12,8 @@
 			<% if (build) { %>
 			require(["delite-build/layer", "ecma402-build/layer"], function () {
 			<% } %>
-				require(["delite/register", "<%= package %>/<%= widgetName %>"], function (register) {
-					register.parse();
+				require(["<%= package %>/<%= widgetName %>"], function () {
+
 				});
 			<% if (build) { %>
 			});
