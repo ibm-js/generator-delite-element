@@ -33,7 +33,9 @@ define({
 			"ecma402": "<%= package %>/bower_components/ecma402",
 			"delite": "<%= package %>/bower_components/delite",
 			"requirejs-dplugins": "<%= package %>/bower_components/requirejs-dplugins",
-			"requirejs-text": "<%= package %>/bower_components/requirejs-text"<% } else { %>
+			"requirejs-text": "<%= package %>/bower_components/requirejs-text",
+			"requirejs-domready": "tmp-elt/bower_components/requirejs-domready",
+			"jquery": "tmp-elt/bower_components/jquery"<% } else { %>
 			"decor-build": "<%= package %>/bower_components/decor-build",
 			"dpointer-build": "<%= package %>/bower_components/dpointer-build",
 			"ecma402-build": "<%= package %>/bower_components/ecma402-build",
