@@ -6,6 +6,8 @@ module.exports = function (grunt) {
 		jshint: {
 			src: [
 				"*.js",
+				"app/**/*.js",
+				"!app/**/_*.js",
 				"tests/*.js"
 			],
 			options: {
