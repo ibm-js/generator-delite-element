@@ -18,8 +18,8 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 			callback: function () {
 				self.log("Dependencies have been installed, point your browser to " +
 						self.appname + "/samples/" + self.widgetName +
-						".html to run a simple sample showing your element, or run selenium and type grunt test:local to " +
-						"launch unit testing");
+						".html to run a simple sample showing your element, or run selenium and type " +
+						"grunt test:local to launch unit testing");
 			}
 		});
 	});
@@ -51,7 +51,7 @@ DeliteElementGenerator.prototype.askForMain = function askFor() {
 
 DeliteElementGenerator.prototype.askMore = function askMore() {
 	var cb = this.async();
-	var stylesheetFormats = ['css', 'less'];
+	var stylesheetFormats = ["css", "less"];
 
 	this.prompt([
 		{
@@ -109,9 +109,9 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			default: true
 		},
 		{
-			type: 'list',
-			name: 'stylesheetFormat',
-			message: 'Would you like to use CSS or LESS?',
+			type: "list",
+			name: "stylesheetFormat",
+			message: "Would you like to use CSS or LESS?",
 			choices: stylesheetFormats
 		}
 	], function (props) {
@@ -131,13 +131,15 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 		this.ecma402 = props.ecma402;
 		this.pointer = props.pointer;
 		this.watch = props.watch;
-		this.stylesheetFormat = props.stylesheetFormat || 'css';
+		this.stylesheetFormat = props.stylesheetFormat || "css";
 		cb();
 	}.bind(this));
 };
 
 DeliteElementGenerator.prototype.generateElement = function app() {
-	var stylesheetPath = this.theming && this.stylesheetFormat === "css" ? "/themes/bootstrap/" : "/" + this.stylesheetFormat + "/";
+	var stylesheetPath = this.theming && this.stylesheetFormat === "css" ? "/themes/bootstrap/" : "/" +
+		this.stylesheetFormat + "/";
+
 	if (this.templated) {
 		this.template("_Element.html", this.widgetName + "/" + this.widgetName + ".html");
 		this.template("_Element.js.templated", this.widgetName + ".js");
@@ -147,7 +149,8 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
 	this.template("_README.md", "README.md");
-	this.template("_Element." + this.stylesheetFormat, this.widgetName + stylesheetPath + this.widgetName + "." + this.stylesheetFormat);
+	this.template("_Element." + this.stylesheetFormat, this.widgetName +
+		stylesheetPath + this.widgetName + "." + this.stylesheetFormat);
 	this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_intern.js", "tests/intern.js");
 	this.copy("intern.local.js", "tests/intern.local.js");
