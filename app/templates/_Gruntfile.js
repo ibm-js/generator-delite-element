@@ -1,9 +1,9 @@
 /*global module */
 module.exports = function (grunt) {
 	// Project configuration.
+
 	grunt.initConfig({
 		pkg: grunt.file.readJSON("package.json"),
-
 		intern: {
 			local: {
 				options: {
@@ -29,7 +29,7 @@ module.exports = function (grunt) {
 			}<% if (stylesheetFormat === "less") {%>,
 			less: {
 				files: '<%= widgetName %>/less/*.less',
-						tasks: ['less'],
+						tasks: ['less:build'],
 						options: {
 					livereload: true
 				}
@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 		less: {
 			build: {
 				files: {
-					"<%= widgetName %><% if (theming) {%>/themes/bootstrap/<% } else { %>/css/<% } %><%= widgetName %>.css": "<%= widgetName %>/less/<%= widgetName %>.less" // destination file and source file
+					"<%= widgetName %><% if (theming) {%>/themes/bootstrap/<% } else { %>/css/<% } %><%= widgetName %>.css": "<%= widgetName %><% if (theming) {%>/themes/bootstrap/<% } else { %>/less/<% } %><%= widgetName %>.less" // destination file and source file
 				}
 			}
 		}<% } %>

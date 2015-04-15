@@ -137,8 +137,7 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 };
 
 DeliteElementGenerator.prototype.generateElement = function app() {
-	var stylesheetPath = this.theming && this.stylesheetFormat === "css" ? "/themes/bootstrap/" : "/" +
-		this.stylesheetFormat + "/";
+	var stylesheetPath = this.theming ? "/themes/bootstrap/" : "/" + this.stylesheetFormat + "/";
 
 	if (this.templated) {
 		this.template("_Element.html", this.widgetName + "/" + this.widgetName + ".html");
