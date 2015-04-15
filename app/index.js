@@ -97,6 +97,12 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			default: false
 		},
 		{
+			type: "list",
+			name: "stylesheetFormat",
+			message: "Would you like to use CSS or LESS?",
+			choices: stylesheetFormats
+		},
+		{
 			type: "confirm",
 			name: "build",
 			message: "Do you want to use build version of delite package (instead of source version)?",
@@ -107,12 +113,6 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			name: "watch",
 			message: "Do you want the Grunt file to include watch & livereload?",
 			default: true
-		},
-		{
-			type: "list",
-			name: "stylesheetFormat",
-			message: "Would you like to use CSS or LESS?",
-			choices: stylesheetFormats
 		}
 	], function (props) {
 		this.elementName = _.slugify(props.elementName);
