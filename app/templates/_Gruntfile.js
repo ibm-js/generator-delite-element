@@ -1,9 +1,17 @@
 /*global module */
 module.exports = function (grunt) {
 	// Project configuration.
-	grunt.initConfig({
-		pkg: grunt.file.readJSON("package.json"),
 
+	var config = {
+		themePath: "/themes/bootstrap/",
+		cssPath: "<%= widgetName %><% if (theming) {%><%%= config.themePath %><% } else { %>/css/<% } %>",
+		lessPath: "<%= widgetName %><% if (theming) {%><%%= config.themePath %><% } else { %>/less/<% } %>"
+	};
+
+	grunt.initConfig({
+		// Project settings
+		config: config,
+		pkg: grunt.file.readJSON("package.json"),
 		intern: {
 			local: {
 				options: {
@@ -21,9 +29,26 @@ module.exports = function (grunt) {
 			}
 		}<% if (watch) {%>,
 		watch: {
-			files: ["*.js", "samples/**", "tests/**", "<%= widgetName %>.js", "<%= widgetName %>/**"],
-			options: {
-				livereload: true
+			default: {
+				files: ["*.js", "samples/**", "tests/**", "<%= widgetName %>.js", "<%= widgetName %>/**"],
+						options: {
+					livereload: true
+				}
+			}<% if (stylesheetFormat === "less") {%>,
+			less: {
+
+				files: '<%= widgetName %>/**/*.less',
+						tasks: ['less:build'],
+						options: {
+					livereload: true
+				}
+		}<% } %>
+		}<% } %><% if (stylesheetFormat === "less") {%>,
+		less: {
+			build: {
+				files: {
+					"<%%= config.cssPath %><%= widgetName %>.css": "<%%= config.lessPath %><%= widgetName %>.less" // destination file and source file
+				}
 			}
 		}<% } %>
 	});
@@ -31,7 +56,9 @@ module.exports = function (grunt) {
 	// Load plugins
 	grunt.loadNpmTasks("intern");
 	grunt.loadNpmTasks("grunt-contrib-watch");
-
+	<% if (stylesheetFormat === "less") {%>
+	grunt.loadNpmTasks("grunt-contrib-less");
+	<% } %>
 	// Testing.
 	// always specify the target e.g. grunt test:remote, grunt test:remote
 	// then add on any other flags afterwards e.g. console, lcovhtml

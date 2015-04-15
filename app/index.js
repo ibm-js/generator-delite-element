@@ -17,9 +17,9 @@ var DeliteElementGenerator = module.exports = function DeliteElementGenerator(ar
 			skipInstall: options["skip-install"],
 			callback: function () {
 				self.log("Dependencies have been installed, point your browser to " +
-					self.appname + "/samples/" + self.widgetName +
-					".html to run a simple sample showing your element, or run selenium and type grunt test:local to " +
-					"launch unit testing");
+						self.appname + "/samples/" + self.widgetName +
+						".html to run a simple sample showing your element, or run selenium and type " +
+						"grunt test:local to launch unit testing");
 			}
 		});
 	});
@@ -48,9 +48,10 @@ DeliteElementGenerator.prototype.askForMain = function askFor() {
 		cb();
 	}.bind(this));
 };
-	
+
 DeliteElementGenerator.prototype.askMore = function askMore() {
 	var cb = this.async();
+	var stylesheetFormats = ["css", "less"];
 
 	this.prompt([
 		{
@@ -96,6 +97,12 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 			default: false
 		},
 		{
+			type: "list",
+			name: "stylesheetFormat",
+			message: "Would you like to use CSS or LESS?",
+			choices: stylesheetFormats
+		},
+		{
 			type: "confirm",
 			name: "build",
 			message: "Do you want to use build version of delite package (instead of source version)?",
@@ -124,11 +131,14 @@ DeliteElementGenerator.prototype.askMore = function askMore() {
 		this.ecma402 = props.ecma402;
 		this.pointer = props.pointer;
 		this.watch = props.watch;
+		this.stylesheetFormat = props.stylesheetFormat || "css";
 		cb();
 	}.bind(this));
 };
 
 DeliteElementGenerator.prototype.generateElement = function app() {
+	var stylesheetPath = this.theming ? "/themes/bootstrap/" : "/" + this.stylesheetFormat + "/";
+
 	if (this.templated) {
 		this.template("_Element.html", this.widgetName + "/" + this.widgetName + ".html");
 		this.template("_Element.js.templated", this.widgetName + ".js");
@@ -138,11 +148,8 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 	this.template("_package.json", "package.json");
 	this.template("_bower.json", "bower.json");
 	this.template("_README.md", "README.md");
-	if (this.theming) {
-		this.template("_Element.css", this.widgetName + "/themes/bootstrap/" + this.widgetName + ".css");
-	} else {
-		this.template("_Element.css", this.widgetName + "/css/" + this.widgetName + ".css");
-	}
+	this.template("_Element." + this.stylesheetFormat, this.widgetName +
+		stylesheetPath + this.widgetName + "." + this.stylesheetFormat);
 	this.template("_Test.js", "tests/" + this.widgetName + ".js");
 	this.template("_intern.js", "tests/intern.js");
 	this.copy("intern.local.js", "tests/intern.local.js");
@@ -152,7 +159,6 @@ DeliteElementGenerator.prototype.generateElement = function app() {
 		this.mkdir(this.widgetName + "/nls/fr");
 		this.copy("messages.js", this.widgetName + "/nls/messages.js");
 		this.copy("messages.fr.js", this.widgetName + "/nls/fr/messages.js");
-
 	}
 };
 
